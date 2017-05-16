@@ -4,17 +4,16 @@
 m4_pattern_allow
 
 AC_PREREQ(2.59)
-AC_INIT([hunspell],[1.6.1],[nemeth@numbertext.org])
+AC_INIT([hunspell],[1.6.1.3],[nemeth@numbertext.org])
 
 AC_CANONICAL_HOST
 AC_SUBST(XFAILED)
 
-AM_INIT_AUTOMAKE(hunspell, 1.6.1)
+AM_INIT_AUTOMAKE(hunspell, 1.6.1.3)
 HUNSPELL_VERSION_MAJOR=`echo $VERSION | cut -d"." -f1`
 HUNSPELL_VERSION_MINOR=`echo $VERSION | cut -d"." -f2`
 AC_SUBST(HUNSPELL_VERSION_MAJOR)
 AC_SUBST(HUNSPELL_VERSION_MINOR)
-
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADER([config.h])
 
@@ -23,6 +22,8 @@ AC_PROG_CXX
 AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_LIBTOOL_WIN32_DLL
+
+AX_CXX_COMPILE_STDCXX_11([noext], [mandatory])
 
 # Checks for libraries.
 
@@ -65,7 +66,7 @@ AS_IF(
      if test "$CURSESLIB" != "-lncursesw" ; then
        echo "No Unicode support on interactive console. (Install Ncursesw library.)"
      else
-       AC_DEFINE(HAVE_NCURSESW_H,1,"Define if you have the <ncursesw/curses.h> header")       
+       AC_DEFINE(HAVE_NCURSESW_H,1,"Define if you have the <ncursesw/curses.h> header")
      fi
      AC_DEFINE(HUNSPELL_WARNING_ON,1,"Define if you need warning messages")
    fi]
